@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <link href="/css/bootstrap.min.css" type="text/css" rel="stylesheet"></link>
+    <link href="/css/3-col-portfolio.css" type="text/css" rel="stylesheet"></link>
+    <script type="application/javascript" href="/js/jquery-1.12.1.min.js"></script>
+    <script type="application/javascript" href="/js/bootstrap.min.js"></script>
+    <title>Watch video</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" th:href="@{/}">EduWatch</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#"><img src="http://www.free-country-flags.com/countries/United_Kingdom/1/tiny/United_Kingdom.png"></img>EN</a></li>
+                <li><a th:href="@{/lang(path='/watch?source=vimeo&amp;id='+${video.getVideoUri()},lang=mk)}"><img src="http://www.free-country-flags.com/countries/Macedonia/1/tiny/Macedonia.png"></img>МК</a></li>
+            </ul>
+            <form action='search' method="get" class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" name="q" required="required" class="form-control" placeholder="Pick a topic..."></input>
+                </div>
+                <button type="submit" class="btn btn-success">Search</button>
+            </form>
+            <ul th:if="${session.user == null}" class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/register}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+            <ul th:if="${session.user != null}" class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/register}"><button class="btn btn-warning">Register</button></a></li>
+                <li class="dropdown">
+                    <a th:href="@{/profile}"><button class="btn btn-success"  th:text="@{Welcome , } + ${session.user.getName()}"></button></a>
+                    <div class="dropdown-content text-center">
+                        <a th:href="@{/logout}"><button class="btn btn-primary">Logout</button></a>
+                    </div>
+                </li></ul>
+        </div><!--/.navbar-collapse -->
+    </div>
+</nav>
+<div class="container">
+
+    <p></p>
+    <!-- Portfolio Item Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 th:text="${video.getName()}" class="page-header">
+            </h1>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <!-- Portfolio Item Row -->
+    <div class="row">
+
+        <div class="col-md-8">
+            <iframe width="750" height="500" th:src='@{https://player.vimeo.com} + ${video.getVideoUri().replaceFirst("s","")}' frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+        </div>
+
+        <div class="col-md-4">
+            <h3>Video Description</h3>
+            <p th:text="${video.getDescription()}"></p>
+
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+    <!-- Related Projects Row -->
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h3 class="page-header">Related Videos</h3>
+        </div>
+
+        <hr></hr>
+
+        <div th:each="relVideo : ${relatedVideos}" class="col-sm-3 col-xs-6">
+            <a th:href="@{/watch(source=vimeo,id=${relVideo.getVideoUri()})}">
+                <img class="img-responsive portfolio-item" th:src='${relVideo.getImageUri()}' alt="" ></img>
+                <h3 th:text='${relVideo.getName()}'></h3>
+            </a>
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+    <hr></hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright © CodeWatch 2016</p>
+            </div>
+        </div>
+        <!-- /.row -->
+    </footer>
+
+</div>
+</body>
+</html>

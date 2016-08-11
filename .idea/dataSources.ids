@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - mydb@localhost" uuid="688ba1f3-a67b-4238-80aa-34f85234a31d">
+    <database-info product="MySQL" version="5.6.28-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.2">
+      <schema id="1" name="mydb"/>
+      <table id="2" parent="1" name="category"/>
+      <table id="3" parent="1" name="favorite"/>
+      <table id="4" parent="1" name="user"/>
+      <column id="5" parent="2" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="6" parent="2" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="7" parent="2" name="lastvisit">
+        <data-type>date</data-type>
+      </column>
+      <column id="8" parent="2" name="count">
+        <data-type>int(11)</data-type>
+      </column>
+      <key id="9" parent="2" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="10" parent="3" name="user_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="11" parent="3" name="category_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <key id="12" parent="3" name="PRIMARY">
+        <columns>user_id
+category_id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="13" parent="3" name="fk_user_has_category_category1">
+        <columns>category_id</columns>
+        <ref-key>category.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="14" parent="3" name="fk_user_has_category_user">
+        <columns>user_id</columns>
+        <ref-key>user.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="15" parent="4" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="16" parent="4" name="email">
+        <mandatory>1</mandatory>
+        <data-type>varchar(65)</data-type>
+      </column>
+      <column id="17" parent="4" name="password">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="18" parent="4" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="19" parent="4" name="lastname">
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="20" parent="4" name="birthdate">
+        <data-type>date</data-type>
+      </column>
+      <column id="21" parent="4" name="location">
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="22" parent="4" name="profile">
+        <data-type>varchar(80)</data-type>
+      </column>
+      <key id="23" parent="4" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
+  </data-source>
+</component>

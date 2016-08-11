@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="mk" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <link href="/css/bootstrap.min.css" type="text/css" rel="stylesheet"></link>
+    <link href="/css/signin.css" type="text/css" rel="stylesheet"></link>
+    <script type="application/javascript" href="/js/jquery-1.12.1.min.js"></script>
+    <script type="application/javascript" href="/js/bootstrap.min.js"></script>
+    <title>Логирање</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">EduWatch</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/lang?path=register&amp;lang=en"><img src="http://www.free-country-flags.com/countries/United_Kingdom/1/tiny/United_Kingdom.png"></img>EN</a></li>
+                <li><a href="#"><img src="http://www.free-country-flags.com/countries/Macedonia/1/tiny/Macedonia.png"></img>МК</a></li>
+            </ul>
+            <form action='search' method="get" class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" name="q" required="required" class="form-control" placeholder="Внесете тема..."></input>
+                </div>
+                <button type="submit" class="btn btn-success">Барај</button>
+            </form>
+            <ul th:if="${session.user == null}" class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/register}"><span class="glyphicon glyphicon-user"></span> Регистрирај се</a></li>
+                <li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Логирај се</a></li>
+            </ul>
+            <ul th:if="${session.user != null}" class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/register}"><button class="btn btn-warning">Регистрирај Се</button></a></li>
+                <li class="dropdown">
+                    <a th:href="@{/profile}"><button class="btn btn-success"  th:text="@{Добредојде , } + ${session.user.getName()}"></button></a>
+                    <div class="dropdown-content text-center">
+                        <a th:href="@{/logout}"><button class="btn btn-primary">Излез</button></a>
+                    </div>
+                </li></ul>
+        </div><!--/.navbar-collapse -->
+    </div>
+</nav>
+<div class="container">
+
+    <form class="form-signin">
+        <h2 class="form-signin-heading">Внецете ги вашите податоци:</h2>
+        <label for="inputEmail" class="sr-only">Емаил адреса</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Емаил адреса" required="required" autofocus="autofocus"></input>
+        <label for="inputPassword" class="sr-only">Лозинка</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Лозинка" required="required"></input>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="remember" value="remember-me"> Запомни ме</input>
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Логирај се</button>
+    </form>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <link href="/css/bootstrap.min.css" type="text/css" rel="stylesheet"></link>
+    <link href="/css/3-col-portfolio.css" type="text/css" rel="stylesheet"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#forma").submit(function(e){
+                e.preventDefault();
+                $.ajax({
+                    url: "/favcat",
+                    type: "POST",
+                    data: {'catname' : $("#catname").val()},
+                    dataType: 'text/plain',
+                }).done(function() {
+                    alert("Added to favorites!");
+                    $("#addbtn").disable();
+                });
+                alert("Added to favorites!");
+                $("#addbtn").prop('disabled', true);
+            });
+        });
+    </script>
+    <script type="application/javascript" href="/js/bootstrap.min.js"></script>
+    <title>Title</title>
+    <style type="text/css">
+        .text-center {
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" th:href="@{/}">EduWatch</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/lang(path='/search?q='+${queryTerm},lang=en)}"><img src="http://www.free-country-flags.com/countries/United_Kingdom/1/tiny/United_Kingdom.png"></img>EN</a></li>
+                <li><a href="#"><img src="http://www.free-country-flags.com/countries/Macedonia/1/tiny/Macedonia.png"></img>МК</a></li>
+            </ul>
+            <form action='search' method="get" class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" name="q" required="required" class="form-control" placeholder=""></input>
+                </div>
+                <button type="submit" class="btn btn-success">Барај</button>
+            </form>
+            <ul th:if="${session.user == null}" class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/register}"><span class="glyphicon glyphicon-user"></span> Регистрирај се</a></li>
+                <li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Логирај се</a></li>
+            </ul>
+            <ul th:if="${session.user != null}" class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/register}"><button class="btn btn-warning">Регистрирај Се</button></a></li>
+                <li class="dropdown">
+                    <a th:href="@{/profile}"><button class="btn btn-success"  th:text="@{Добредојде , } + ${session.user.getName()}"></button></a>
+                    <div class="dropdown-content text-center">
+                        <a th:href="@{/logout}"><button class="btn btn-primary">Излез</button></a>
+                    </div>
+                </li></ul>
+        </div><!--/.navbar-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="row">
+        <div class="text-center">
+            <h3>Барајте категорија по буква:</h3>
+            <ul class="pagination">
+                <li>
+                    <a href="/category?sc=a"><h4>A</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=b"><h4>B</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=c"><h4>C</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=d"><h4>D</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=e"><h4>E</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=f"><h4>F</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=g"><h4>G</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=h"><h4>H</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=i"><h4>I</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=j"><h4>J</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=k"><h4>K</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=l"><h4>L</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=m"><h4>M</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=n"><h4>N</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=o"><h4>O</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=p"><h4>P</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=q"><h4>Q</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=r"><h4>R</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=s"><h4>S</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=t"><h4>T</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=u"><h4>U</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=v"><h4>V</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=x"><h4>X</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=y"><h4>Y</h4></a>
+                </li>
+                <li>
+                    <a href="/category?sc=Z"><h4>Z</h4></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-8">
+            <h1 class="page-header" th:text="${queryTerm}">
+            </h1>
+        </div>
+        <div class="col-lg-4">
+            <form id="forma" action="#">
+                <input id="catname" type="hidden" name="catname" th:value="${queryTerm}"></input>
+                <button type="submit" id="addbtn" class="btn btn-lg btn-primary" th:text="@{Додади  }+ ' ' + ${queryTerm} + ' ' + @{ во фаворити.}"></button>
+            </form>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <!-- Projects Row -->
+    <div class="row">
+        <div th:each="video : ${videosYouTube}" class="col-md-4 portfolio-item">
+            <a th:href="@{/watch(source=youtube,id=${video.getId().getVideoId()})}">
+                <img class="img-responsive" th:src="${video.getSnippet().getThumbnails().getHigh().getUrl()}" alt=""></img>
+            </a>
+            <h3>
+                <a th:href="@{/watch(source=youtube,id=${video.getId().getVideoId()})}" th:text="${video.getSnippet().getTitle()}"></a>
+            </h3>
+            <p th:text="${video.getSnippet().getDescription()}"></p>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <hr></hr>
+
+
+    <div class="row">
+        <div th:each="video : ${videosVimeo}" class="col-md-4 portfolio-item">
+            <a th:href="@{/watch(source=vimeo,id=${video.getVideoUri()})}">
+                <img class="img-responsive" th:src='${video.getImageUri()}' alt=""></img>
+            </a>
+            <h3>
+                <a th:href="@{/watch(source=vimeo,id=${video.getVideoUri()})}" th:text='${video.getName()}'></a>
+            </h3>
+            <p th:text='${video.getDescription()}'></p>
+        </div>
+    </div>
+
+
+    <hr></hr>
+
+    <!-- Pagination -->
+    <div class="row text-center">
+        <div class="col-lg-12">
+            <ul class="pagination">
+                <li>
+                    <a href="#">«</a>
+                </li>
+                <li class="active">
+                    <a href="#">1</a>
+                </li>
+                <li>
+                    <a href="#">2</a>
+                </li>
+                <li>
+                    <a href="#">3</a>
+                </li>
+                <li>
+                    <a href="#">4</a>
+                </li>
+                <li>
+                    <a href="#">5</a>
+                </li>
+                <li>
+                    <a href="#">»</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <hr></hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Изработено: © CodeWatch 2016</p>
+            </div>
+        </div>
+        <!-- /.row -->
+    </footer>
+
+</div>
+</body>
+
+</html>
